@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Container, Table, Button } from "semantic-ui-react";
+import { Link } from 'react-router-dom';
 
 import { PatientFormValues } from "../AddPatientModal/AddPatientForm";
 import AddPatientModal from "../AddPatientModal";
@@ -10,9 +11,10 @@ import HealthRatingBar from "../components/HealthRatingBar";
 import { useStateValue } from "../state";
 
 const PatientListPage: React.FC = () => {
-  const [{ patients }, dispatch] = useStateValue();
+  const [{ patients }, dispatch] = useStateValue(); // useStateValue hook used "to inject the state, and the dispatcher for updating it"
 
-  const [modalOpen, setModalOpen] = React.useState<boolean>(false);
+  // local state
+  const [modalOpen, setModalOpen] = React.useState<boolean>(false); 
   const [error, setError] = React.useState<string | undefined>();
 
   const openModal = (): void => setModalOpen(true);
@@ -53,7 +55,7 @@ const PatientListPage: React.FC = () => {
         <Table.Body>
           {Object.values(patients).map((patient: Patient) => (
             <Table.Row key={patient.id}>
-              <Table.Cell>{patient.name}</Table.Cell>
+              <Table.Cell><Link to={`/patients/${patient.id}`}>{patient.name}</Link></Table.Cell>
               <Table.Cell>{patient.gender}</Table.Cell>
               <Table.Cell>{patient.occupation}</Table.Cell>
               <Table.Cell>
