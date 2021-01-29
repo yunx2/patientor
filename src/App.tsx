@@ -13,7 +13,6 @@ import PatientInfo from './PatientListPage/PatientInfo';
 const App: React.FC = () => {
   const [, dispatch] = useStateValue();
   React.useEffect(() => {
-    axios.get<void>(`${apiBaseUrl}/ping`);
 
     const fetchPatientList = async () => {
       try {
@@ -38,7 +37,8 @@ const App: React.FC = () => {
           </Button>
           <Divider hidden />
           <Switch>
-            <Route path="/patients/:id" render={() => <PatientInfo />} />
+            <Route path="/patients/:id"> <PatientInfo /> 
+            </Route>
             <Route path="/" render={() => <PatientListPage />} />
           </Switch>
         </Container>
