@@ -10,17 +10,17 @@ import { apiBaseUrl } from '../constants';
 const PatientInfo: React.FC = () => {
   const [{ patients }, dispatch] = useStateValue();
 
-  // const [patientId, setPatientId] = useState<string>('');
   const [patientData, setPatientData] = useState<Patient>();
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   
   useEffect(() => {
-    // first check current state for patient data; if not found, then make api call and add update state to include new patient data
+  
     const fetchPatientById = async () => {
-      // if (patients.hasOwnProperty(id)) {
-      //   setPatientData(patients.id);
-      // } 
-        try {
+
+        try { // right now this try block works, the api call works, retrieved data is being set to localstate patientData
+          if (patients.hasOwnProperty(id)) {
+            setPatientData(patients.id);
+          }
           const { data: newPatientData } = await axios.get<Patient>(`${apiBaseUrl}/patients/${id}`);
           setPatientData(newPatientData);
           dispatch({
@@ -40,7 +40,6 @@ const PatientInfo: React.FC = () => {
   return (
     <div>
       <div>name: {patientData.name}</div>
-      <div>id: {patientData.id}</div>
       <div>occupation: {patientData.occupation}</div>
       <div>ssn: {patientData.ssn}</div>
       <div>date of birth: {patientData.dateOfBirth}</div>
