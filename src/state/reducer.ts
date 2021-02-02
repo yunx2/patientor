@@ -1,5 +1,6 @@
 import { State } from "./state";
 import { Patient } from "../types";
+// import { PatientFormValues } from '../AddPatientModal/AddPatientForm';
 
 export type Action =
   | {
@@ -36,3 +37,17 @@ export const reducer = (state: State, action: Action): State => {
       return state;
   }
 };
+
+export const setPatientList = (patientList: Patient[]): Action => {
+  return {
+    type: "SET_PATIENT_LIST",
+    payload: patientList
+  };
+};
+
+// export const addPatient = (data: PatientFormValues): Action => {
+//   return {
+//     type: 'ADD_PATIENT',
+//     payload: data
+//   };
+// };

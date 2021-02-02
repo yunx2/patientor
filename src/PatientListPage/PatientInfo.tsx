@@ -32,7 +32,7 @@ const PatientInfo: React.FC = () => {
         }
     };
     fetchPatientById();
-  }, [dispatch] );
+  }, [patientData] );
 
   if (!patientData) {
     return null;
