@@ -16,11 +16,7 @@ const PatientInfo: React.FC = () => {
   useEffect(() => {
   
     const fetchPatientById = async () => {
-
         try { // right now this try block works, the api call works, retrieved data is being set to localstate patientData
-          if (patients.hasOwnProperty(id)) {
-            setPatientData(patients.id);
-          }
           const { data: newPatientData } = await axios.get<Patient>(`${apiBaseUrl}/patients/${id}`);
           setPatientData(newPatientData);
           dispatch({
