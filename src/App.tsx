@@ -12,9 +12,8 @@ import PatientListPage from "./PatientListPage/index";
 import PatientInfo from './PatientListPage/PatientInfo';
 
 const App: React.FC = () => {
-  const [, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue(); // comma before 'dispatch' indicates that dispatch is assigned the value of the second element of the tuple (ie the dispatch function) and not the first element (ie the state value)
   React.useEffect(() => { // side effects
-
     const fetchPatientList = async () => {
       try {
         const { data: patientListFromApi } = await axios.get<Patient[]>( 

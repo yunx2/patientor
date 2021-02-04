@@ -4,7 +4,6 @@ import { Patient } from "../types";
 import { Action } from "./reducer";
 
 export type State = { // State is an object containing one key, 'patients'. the value of 'patients' is an object (aka dictionary data structure) with string keys. 
-// values of this object have a typing that is a union of type Patient and 'undefined' because otherwise the compiler would consider any value to be type Patient even if the value did not exist
   patients: { [id: string]: Patient }; 
 };
 
