@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'; // use params returns match.params
 import { Patient } from '../types';
 import { useStateValue, addPatient } from '../state';
 import { apiBaseUrl } from '../constants';
-// import PatientEntry from './PatientEntry';
+import PatientEntry from './PatientEntry';
 
 const PatientInfo: React.FC = () => {
   const [{ patients }, dispatch] = useStateValue(); // patients looks
@@ -36,24 +36,23 @@ const PatientInfo: React.FC = () => {
     // call the previously defined function
     fetchPatientById();
   }, [dispatch, id]); // why did removing patientData from dependencies array make the 'can't perform a react state update on an unmounted component...' warning go away?
-  if (!patientData) {
-    return <div></div>;
-  }
+  if (!patientData) { // when this was an if-else statement single patient view didn't work because entries was undefined
+      return <div></div>;
+  } 
   const { entries } = patientData;
-  return (
-    <div>
-      <div><h3>{patientData.name}</h3></div>
-      <br />
-      <div>ssn: {patientData.ssn}</div>
-      <div>occupation: {patientData.occupation}</div>
-      <br />
+    return (
       <div>
-        <h3>Entries</h3>
-        <div>date of birth: {patientData.dateOfBirth} </div>
+        <div><h3>{patientData.name}</h3></div>
+        <br />
+        <div>ssn: {patientData.ssn}</div>
+        <div>occupation: {patientData.occupation}</div>
+        <br />
+        <div>
+          <h3>Entries</h3>
+          {entries.map(e => <PatientEntry key={e.id} entry={e} />)}
+        </div>
       </div>
-      
-    </div>
-  );
+    );
 };
 
 export default PatientInfo;
