@@ -2,7 +2,7 @@ import { State } from "./state";
 import { Patient } from "../types";
 // import { PatientFormValues } from '../AddPatientModal/AddPatientForm';
 
-export type Action =
+export type Action = // type definition
   | {
       type: "SET_PATIENT_LIST";
       payload: Patient[];
@@ -12,15 +12,15 @@ export type Action =
       payload: Patient;
     };
 
-export const reducer = (state: State, action: Action): State => {
+export const reducer = (state: State, action: Action): State => { // define reducer function
   switch (action.type) {
     case "SET_PATIENT_LIST":
       return {
-        ...state,
+        ...state, // current state
         patients: {
-          ...action.payload.reduce(
-            (memo, patient) => ({ ...memo, [patient.id]: patient }),
-            {}
+          ...action.payload.reduce(  // action.payload is an array of patients. array.reduce is called on the array
+            (memo, patient) => ({ ...memo, [patient.id]: patient }), // memo is the accumulator parameter of the reducer function, patient is currentValue parameter
+            {} // initial value of accumulator 
           ),
           ...state.patients
         }
@@ -38,7 +38,7 @@ export const reducer = (state: State, action: Action): State => {
   }
 };
 
-export const setPatientList = (patientList: Patient[]): Action => {
+export const setPatientList = (patientList: Patient[]): Action => { // action creator
   return {
     type: "SET_PATIENT_LIST",
     payload: patientList

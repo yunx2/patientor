@@ -13,14 +13,14 @@ import PatientInfo from './PatientListPage/PatientInfo';
 
 const App: React.FC = () => {
   const [, dispatch] = useStateValue();
-  React.useEffect(() => {
+  React.useEffect(() => { // side effects
 
     const fetchPatientList = async () => {
       try {
-        const { data: patientListFromApi } = await axios.get<Patient[]>(
+        const { data: patientListFromApi } = await axios.get<Patient[]>( 
           `${apiBaseUrl}/patients`
         );
-        dispatch(setPatientList(patientListFromApi));
+        dispatch(setPatientList(patientListFromApi)); // patientListFromApi is an array of Patients
       } catch (e) {
         console.error(e);
       }

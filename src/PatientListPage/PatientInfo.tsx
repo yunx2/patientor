@@ -8,13 +8,14 @@ import { useStateValue } from '../state';
 import { apiBaseUrl } from '../constants';
 
 const PatientInfo: React.FC = () => {
-  const [{ patients }, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue(); // comma before 'dispatch' indicates that dispatch is assigned the value of the second element of the tuple (ie the dispatch function) and not the first element (ie the state value)
 
-  const [patientData, setPatientData] = useState<Patient>();
+  const [patientData, setPatientData] = useState<Patient>(); // the retrieved patient data is set as a local state so that it's data can be used in PatientInfo's return value
   const { id } = useParams<{ id: string }>();
   
   useEffect(() => {
-  
+    // define a function containing the side effect logic; useEffect's first argument can't be async; so in order to do async side effect things like api calls, an anonymous function is wrapped around an async function definition and call
+
     const fetchPatientById = async () => {
         try { // right now this try block works, the api call works, retrieved data is being set to localstate patientData
           const { data: newPatientData } = await axios.get<Patient>(`${apiBaseUrl}/patients/${id}`);
@@ -27,11 +28,12 @@ const PatientInfo: React.FC = () => {
           console.error(e);
         }
     };
+    // call the previously defined function
     fetchPatientById();
-  }, [patientData] );
+  }, [dispatch, id]);
 
   if (!patientData) {
-    return null;
+    return <div></div>;
   }
   return (
     <div>
