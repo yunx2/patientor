@@ -51,7 +51,7 @@ interface OccupationalHealthcareEntry extends BaseEntry {
   sickLeave?: SickLeave;
 }
 
-type Entry = 
+export type Entry = 
 | HospitalEntry
 | OccupationalHealthcareEntry
 | HealthCheckEntry;
@@ -63,5 +63,5 @@ export interface Patient {
   gender: Gender;
   ssn?: string;
   dateOfBirth?: string;
-  entries: Entry[];
+  entries: Entry[]; // array of Entry objects
 }
