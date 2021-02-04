@@ -45,9 +45,9 @@ export const setPatientList = (patientList: Patient[]): Action => { // action cr
   };
 };
 
-// export const addPatient = (data: PatientFormValues): Action => {
-//   return {
-//     type: 'ADD_PATIENT',
-//     payload: data
-//   };
-// };
+export const addPatient = (newPatient: Patient): Action => {
+  return {
+    type: 'ADD_PATIENT',
+    payload: newPatient
+  };
+};

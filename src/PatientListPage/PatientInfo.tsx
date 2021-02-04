@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom'; // use params returns match.params object
 
 import { Patient } from '../types';
-import { useStateValue } from '../state';
+import { useStateValue, addPatient } from '../state';
 import { apiBaseUrl } from '../constants';
 
 const PatientInfo: React.FC = () => {
@@ -26,10 +26,7 @@ const PatientInfo: React.FC = () => {
           try { // right now this try block works, the api call works, retrieved data is being set to localstate patientData
             const { data: newPatientData } = await axios.get<Patient>(`${apiBaseUrl}/patients/${id}`);
             setPatientData(newPatientData);
-            dispatch({
-              type: "ADD_PATIENT",
-              payload: newPatientData
-            });
+            dispatch(addPatient(newPatientData));
           } catch (e) {
             console.error(e);
           }
