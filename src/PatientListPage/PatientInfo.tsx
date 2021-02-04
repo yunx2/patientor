@@ -30,7 +30,7 @@ const PatientInfo: React.FC = () => {
     };
     // call the previously defined function
     fetchPatientById();
-  }, [dispatch, id]);
+  }, [dispatch, id]); // why did removing patientData from dependencies array make the 'can't perform a react state update on an unmounted component...' warning go away?
 
   if (!patientData) {
     return <div></div>;
